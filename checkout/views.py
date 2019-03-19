@@ -6,6 +6,7 @@ from .models import OrderLineItem
 from django.conf import settings
 from django.utils import timezone
 from products.models import Product
+from project_5.settings import MEDIA_URL
 import stripe
 
 # Create your views here.
@@ -58,4 +59,4 @@ def checkout(request):
         payment_form = MakePaymentForm()
         order_form = OrderForm()
         
-    return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLISHABLE})
+    return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLISHABLE, "MEDIA_URL": MEDIA_URL})

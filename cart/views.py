@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse
+from project_5.settings import MEDIA_URL
 
 # Create your views here.
 def view_cart(request):
@@ -6,7 +7,7 @@ def view_cart(request):
     A view that renders the cart contents page
     """
     
-    return render(request, "cart.html")
+    return render(request, "cart.html", {"MEDIA_URL": MEDIA_URL})
     
 def add_to_cart(request, id):
     """
@@ -21,7 +22,7 @@ def add_to_cart(request, id):
         cart[id] = cart.get(id, quantity)
     
     request.session['cart'] = cart
-    return redirect(reverse('index'))
+    return redirect(reverse('products'))
     
 def adjust_cart(request, id):
     """
