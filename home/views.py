@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from catergories.views import all_cats
 
 # Create your views here.
 def index(request):
