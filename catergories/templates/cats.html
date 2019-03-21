@@ -1,179 +1,55 @@
 {% extends 'home.html' %}
 
 {% block cats %}
-  
   <div class="tab-pane fade show active" id="list-mens" role="tabpanel" aria-labelledby="list-mens-list">
-    <h1 class="catHeader">Mens</h1>
-    {% for Men in Mens %}
-      <p>test</p>
-    {% endfor %}
-    <div class="card-deck">
-      <div class="card">
-        <img class="card-img-top" src="/media/cats/mens/t-shirt.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">T-Shirts</h5>
+    <h1 class="cat-header">Mens</h1>
+    <div class="container cat-container">
+      <div class="row cat-row">
+        {% for Men in Mens %}
+        <div class="col-sm-4 cat-body">
+          <img class="cat-img" src="{{MEDIA_URL}}{{ Men.image }}">
+          <h5 class="cat-title">{{ Men.title}}</h5>
         </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="/media/cats/mens/jumper.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Jumpers</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="/media/cats/mens/hoodie.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Hoodies</h5>
-        </div>
-      </div>
-    </div>
-    <div class="card-deck">
-      <div class="card">
-        <img class="card-img-top" src="/media/cats/mens/tracky.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Trackies</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="/media/cats/mens/hat.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Hats</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="/media/cats/mens/bandana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Bandanas</h5>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
   <div class="tab-pane fade" id="list-womens" role="tabpanel" aria-labelledby="list-womens-list">
     <h1 class="catHeader">Womens</h1>
-    <div class="card-deck">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">T-Shirts</h5>
+    <div class="container cat-container">
+      <div class="row cat-row">
+        {% for Women in Womens %}
+        <div class="col-sm-4 cat-body">
+          <img class="cat-img" src="{{MEDIA_URL}}{{ Women.image }}">
+          <h5 class="cat-title">{{ Women.title}}</h5>
         </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Jumpers</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Hoodies</h5>
-        </div>
-      </div>
-    </div>
-    <div class="card-deck">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Trackies</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Hats</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Bandanas</h5>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
   <div class="tab-pane fade" id="list-unisex" role="tabpanel" aria-labelledby="list-unisex-list">
     <h1 class="catHeader">Unisex</h1>
-    <div class="card-deck">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">T-Shirts</h5>
+    <div class="container cat-container">
+      <div class="row cat-row">
+        {% for Unisex in Unisexs %}
+        <div class="col-sm-4 cat-body">
+          <img class="cat-img" src="{{MEDIA_URL}}{{ Unisex.image }}">
+          <h5 class="cat-title">{{ Unisex.title}}</h5>
         </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Jumpers</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Hoodies</h5>
-        </div>
-      </div>
-    </div>
-    <div class="card-deck">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Trackies</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Hats</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Bandanas</h5>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
   <div class="tab-pane fade" id="list-extra" role="tabpanel" aria-labelledby="list-extra-list">
     <h1 class="catHeader">Extra</h1>
-    <div class="card-deck">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Stickers</h5>
+    <div class="container cat-container">
+      <div class="row cat-row">
+        {% for Extra in Extras %}
+        <div class="col-sm-4 cat-body">
+          <img class="cat-img" src="{{MEDIA_URL}}{{ Extra.image }}">
+          <h5 class="cat-title">{{ Extra.title}}</h5>
         </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Cups</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Lighters</h5>
-        </div>
-      </div>
-    </div>
-    <div class="card-deck">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Grinders</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Bags</h5>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Rolling Tube</h5>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
