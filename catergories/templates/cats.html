@@ -7,8 +7,10 @@
       <div class="row cat-row">
         {% for Men in Mens %}
         <div class="col-sm-4 cat-body">
+          <a href="catergories/mens/{{Men.title|lower}}">
           <img class="cat-img" src="{{MEDIA_URL}}{{ Men.image }}">
           <h5 class="cat-title">{{ Men.title}}</h5>
+          </a>
         </div>
         {% endfor %}
       </div>

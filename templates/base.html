@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
     <title>Start Website</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}" type="text/css" />
@@ -13,6 +14,7 @@
     {% endblock %}
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light p-3 bg-dark">
         <div class="row" style="width: 100% !important">
           <div class="col-sm-3">
@@ -69,12 +71,18 @@
                     <i class="fa fa-user userSection" aria-hidden="true"></i>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Account</a>
-                    <a class="dropdown-item" href="#">Purchased</a>
-                    <a class="dropdown-item" href="#">Orders</a>
-                    <a class="dropdown-item" href="#">Support</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Log Out</a>
+                    {% if user.is_authenticated %}
+                      <a href="{% url 'profile' %}" class="dropdown-item">Profile</a>
+                      <a class="dropdown-item" href="#">Account</a>
+                      <a class="dropdown-item" href="#">Purchased</a>
+                      <a class="dropdown-item" href="#">Orders</a>
+                      <a class="dropdown-item" href="#">Support</a>
+                      <div class="dropdown-divider"></div>
+                      <a href="{% url 'logout' %}" class="dropdown-item">Log Out</a>
+                    {% else %}
+                      <a href="{% url 'login' %}" class="dropdown-item">Log In</a>
+                      <a href="{% url 'register' %}" class="dropdown-item">Register</a>
+                    {% endif %}
                   </div>
                 </li>
               </ul>
@@ -83,11 +91,49 @@
         </div>
     </nav>
     
+    <!-- Content -->
     <div>
         {% block content %}
         
         {% endblock %}
     </div>
+    
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="container">
+        <p class="m-0 text-center" >Copyright &copy; Your Website 2018</p>
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-3"></div>
+            <!-- Face book icon -->
+            <div class="col-sm-1">
+              <a class="socailIcons" href="https://www.facebook.com/spacereport/?ref=br_rs"><i class="fa fa-facebook fa-2x"></i></a>
+            </div>
+            <!-- twitter icon -->
+            <div class="col-sm-1">
+              <a class="socailIcons" href="https://twitter.com/search?q=space&src=typd"><i class="fa fa-twitter-square fa-2x"></i></a>
+            </div>
+            <!-- youtube icon -->
+            <div class="col-sm-1">
+              <a class="socailIcons" href="https://www.youtube.com/results?search_query=space"><i class="fa fa-youtube-square fa-2x"></i></a>
+            </div>
+            <!-- GitHub icon -->
+            <div class="col-sm-1">
+              <a class="socailIcons" href="https://github.com/jaysson29"><i class="fa fa-github-square fa-2x"></i></a>
+            </div>
+            <!-- Wikipedia icon -->
+            <div class="col-sm-1">
+              <a class="socailIcons" href="https://en.wikipedia.org/wiki/Space"><i class="fa fa-wikipedia-w fa-2x"></i></a>
+            </div>
+            <!-- Google icon -->
+            <div class="col-sm-1">
+              <a class="socailIcons" href="https://www.google.co.uk/search?q=space&rlz=1C1EKKP_enGB778GB778&oq=space&aqs=chrome.0.69i59j69i61j69i65.849j0j9&sourceid=chrome&ie=UTF-8"><i class="fa fa-google fa-2x"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
