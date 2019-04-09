@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<h3>{{catergory_title}}'s > {{subCatergory}}</h3>
+
 <div class="row row-flex main">
-    {% for product in product_select %}
     
-    <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-3 col-md-4 display panel-default">
-        <div class="panel-body">
-            <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
-            
-            <h3>{{ product.name }}</h3>
-            <p class="product-description">{{ product.description }}</p>
-            <p>{{ product.price}}</p>
-            
-            <form method="post" action="{% url 'add_to_cart' product.id %}">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input type="number" name="quantity" min="1" max="999" class="form-control" placeholder="Quantity">
-                    <span class="input-group-btn">
-                        <button class="btn btn-success" type="submit">Add</button>
-                    </span>
+    {% for product in product_select %}
+        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4 col-md-3 display panel-default product-panel">
+            <a href="{{ product.id }}">
+                <div class="panel-body">
+                    <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
+                    <div class="product-info">
+                        <h3>{{ product.name }}</h3>
+                        <p> &#163; {{ product.price}}</p>
+                    </div>
+                    <span class="product-panel-button"><input type="button" value="View Details"></span>
+                    <span class="product-panel-button"><input type="button" value="Add To Cart"></span>
+                    <!--<div class="product-price">-->
+                        <!--<p class="product-description">{{ product.description }}</p>-->
+                    <!--    <p> &#163; {{ product.price}}</p>-->
+                    <!--</div>-->
                 </div>
-            </form>
+            </a>
         </div>
-    </div>
     {% endfor %}
 </div>
 
