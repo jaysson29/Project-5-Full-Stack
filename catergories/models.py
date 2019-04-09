@@ -1,46 +1,31 @@
 from django.db import models
+from django.contrib import admin
 
 # Create your models here.
-class Men(models.Model):
-    title = models.CharField(max_length=254, default='')
-    image = models.ImageField(upload_to='cats/mens')
-    
-    class Meta:
-        verbose_name = 'A Mens Catergory'
-        verbose_name_plural = 'Mens'
-    
-    def __str__(self):
-        return self.title
-        
-class Women(models.Model):
-    title = models.CharField(max_length=254, default='')
-    image = models.ImageField(upload_to='cats/womens')
-    
-    class Meta:
-        verbose_name = 'A Womens Catergory'
-        verbose_name_plural = 'Womens'
-    
-    def __str__(self):
-        return self.title
 
-class Unisex(models.Model):
+class Catergory(models.Model):
     title = models.CharField(max_length=254, default='')
-    image = models.ImageField(upload_to='cats/unisex')
     
     class Meta:
-        verbose_name = 'A Unisexs Catergory'
-        verbose_name_plural = 'Unisexs'
+        verbose_name_plural = 'Catergories'
     
     def __str__(self):
         return self.title
         
-class Extra(models.Model):
+class SubCatergory(models.Model):
     title = models.CharField(max_length=254, default='')
-    image = models.ImageField(upload_to='cats/extra')
+    image = models.ImageField(upload_to='cats/images/')
+    catergory = models.ForeignKey(Catergory, null=True, default=0, blank=True, on_delete=models.CASCADE)
     
     class Meta:
-        verbose_name = 'A Extras Catergory'
-        verbose_name_plural = 'Extras'
+        verbose_name_plural = 'SubCatergories'
     
     def __str__(self):
         return self.title
+        
+        
+class SubCatergoryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'catergory',)
+    list_per_page = 25
+        
+

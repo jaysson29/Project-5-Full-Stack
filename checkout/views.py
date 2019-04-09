@@ -7,6 +7,7 @@ from django.conf import settings
 from django.utils import timezone
 from products.models import Product
 from project_5.settings import MEDIA_URL
+from catergories.models import Catergory
 import stripe
 
 # Create your views here.
@@ -15,6 +16,10 @@ stripe.api_key = settings.STRIPE_SECRET
 
 @login_required()
 def checkout(request):
+    """
+    A view that renders the cart contents page
+    """
+    Catergories = Catergory.objects.all()
     if request.method=="POST":
         order_form = OrderForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
@@ -59,4 +64,4 @@ def checkout(request):
         payment_form = MakePaymentForm()
         order_form = OrderForm()
         
-    return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLISHABLE, "MEDIA_URL": MEDIA_URL})
+    return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLISHABLE, "MEDIA_URL": MEDIA_URL, "Catergories": Catergories})

@@ -47,13 +47,10 @@
                     Catergories
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Mens</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Womens</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Unisex</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Extra</a>
+                    {% for Catergory in Catergories %}
+                      <a class="dropdown-item" href="{% url 'index' %}">{{Catergory.title}}</a>
+                      <div class="dropdown-divider"></div>
+                    {% endfor %}
                   </div>
                 </li>
                 <li class="nav-item dropdown">

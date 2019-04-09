@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect, reverse
 from project_5.settings import MEDIA_URL
+from catergories.models import Catergory
 
 # Create your views here.
 def view_cart(request):
     """
     A view that renders the cart contents page
     """
-    
-    return render(request, "cart.html", {"MEDIA_URL": MEDIA_URL})
+    Catergories = Catergory.objects.all()
+    return render(request, "cart.html", {"MEDIA_URL": MEDIA_URL, "Catergories": Catergories})
     
 def add_to_cart(request, id):
     """

@@ -1,8 +1,6 @@
 from django.contrib import admin
-from .models import Men, Women, Unisex, Extra
+from .models import Catergory, SubCatergory, SubCatergoryAdmin
 
 # Register your models here.
-admin.site.register(Men)
-admin.site.register(Women)
-admin.site.register(Unisex)
-admin.site.register(Extra)
+admin.site.register(Catergory)
+admin.site.register(SubCatergory, SubCatergoryAdmin)

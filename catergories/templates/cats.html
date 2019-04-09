@@ -1,58 +1,46 @@
 {% extends 'home.html' %}
 
 {% block cats %}
-  <div class="tab-pane fade show active" id="list-mens" role="tabpanel" aria-labelledby="list-mens-list">
-    <h1 class="cat-header">Mens</h1>
-    <div class="container cat-container">
-      <div class="row cat-row">
-        {% for Men in Mens %}
-        <div class="col-sm-4 cat-body">
-          <a href="catergories/mens/{{Men.title|lower}}">
-          <img class="cat-img" src="{{MEDIA_URL}}{{ Men.image }}">
-          <h5 class="cat-title">{{ Men.title}}</h5>
-          </a>
-        </div>
+<div class="col-sm-2" style="background-color: grey;padding-left: 0;padding-right: 0;">
+  <div class="list-group" id="list-tab" role="tablist">
+    <a class="list-group-item list-group-item-action disabled header-cat">Catergories</a>
+    {% for Catergory in Catergories %}
+      {% if Catergory == Catergories.0 %}
+        <a class="list-group-item list-group-item-action active" id="list-{{Catergory.title|lower}}-list" data-toggle="list" href="#list-{{Catergory.title|lower}}" role="tab" aria-controls="{{Catergory.title|lower}}">{{Catergory.title}}'s</a>
+      {% else %}
+        <a class="list-group-item list-group-item-action" id="list-{{Catergory.title|lower}}-list" data-toggle="list" href="#list-{{Catergory.title|lower}}" role="tab" aria-controls="{{Catergory.title|lower}}">{{Catergory.title}}'s</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<div class="col-sm-10 cat-base">
+  <div class="tab-content" id="nav-tabContent">
+    {% for Catergory in Catergories %}
+    
+    {% if Catergory == Catergories.0 %}
+      <div class="tab-pane fade show active" id="list-{{Catergory.title|lower}}" role="tabpanel" aria-labelledby="list-{{Catergory.title|lower}}-list">
+    {% else %}
+      <div class="tab-pane fade show" id="list-{{Catergory.title|lower}}" role="tabpanel" aria-labelledby="list-{{Catergory.title|lower}}-list">
+    {% endif %}
+        <h1 class="cat-header">{{Catergory.title}}'s</h1>
+        {% for SubCatergory in SubCatergories %}
+          {% if SubCatergory.catergory == Catergory %}
+          <div class="container cat-container">
+            <div class="row cat-row">
+              <div class="col-sm-4 cat-body">
+                <a href="catergories/{{Catergory.title}}/{{SubCatergory.title}}">
+                <img class="cat-img" src="{{MEDIA_URL}}{{SubCatergory.image }}">
+                <h5 class="cat-title">{{SubCatergory.title}}</h5>
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endif %}
         {% endfor %}
       </div>
-    </div>
+    {% endfor %}
   </div>
-  <div class="tab-pane fade" id="list-womens" role="tabpanel" aria-labelledby="list-womens-list">
-    <h1 class="catHeader">Womens</h1>
-    <div class="container cat-container">
-      <div class="row cat-row">
-        {% for Women in Womens %}
-        <div class="col-sm-4 cat-body">
-          <img class="cat-img" src="{{MEDIA_URL}}{{ Women.image }}">
-          <h5 class="cat-title">{{ Women.title}}</h5>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-  <div class="tab-pane fade" id="list-unisex" role="tabpanel" aria-labelledby="list-unisex-list">
-    <h1 class="catHeader">Unisex</h1>
-    <div class="container cat-container">
-      <div class="row cat-row">
-        {% for Unisex in Unisexs %}
-        <div class="col-sm-4 cat-body">
-          <img class="cat-img" src="{{MEDIA_URL}}{{ Unisex.image }}">
-          <h5 class="cat-title">{{ Unisex.title}}</h5>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-  <div class="tab-pane fade" id="list-extra" role="tabpanel" aria-labelledby="list-extra-list">
-    <h1 class="catHeader">Extra</h1>
-    <div class="container cat-container">
-      <div class="row cat-row">
-        {% for Extra in Extras %}
-        <div class="col-sm-4 cat-body">
-          <img class="cat-img" src="{{MEDIA_URL}}{{ Extra.image }}">
-          <h5 class="cat-title">{{ Extra.title}}</h5>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
+</div>
+
 {% endblock %}

@@ -4,12 +4,14 @@ from django.core.urlresolvers import reverse
 from .forms import UserLoginForm, UserRegistrationForm
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
+from catergories.models import Catergory
 
 
 # Create your views here.
 def index(request):
     """A view that displays the index page"""
-    return render(request, "index.html")
+    Catergories = Catergory.objects.all()
+    return render(request, "index.html", {"Catergories": Catergories})
 
 
 def logout(request):
@@ -21,6 +23,7 @@ def logout(request):
 
 def login(request):
     """A view that manages the login form"""
+    Catergories = Catergory.objects.all()
     if request.method == 'POST':
         user_form = UserLoginForm(request.POST)
         if user_form.is_valid():
@@ -41,18 +44,20 @@ def login(request):
     else:
         user_form = UserLoginForm()
 
-    args = {'user_form': user_form, 'next': request.GET.get('next', '')}
+    args = {'user_form': user_form, 'next': request.GET.get('next', ''), "Catergories": Catergories}
     return render(request, 'login.html', args)
 
 
 @login_required
 def profile(request):
     """A view that displays the profile page of a logged in user"""
-    return render(request, 'profile.html')
+    Catergories = Catergory.objects.all()
+    return render(request, 'profile.html', {"Catergories": Catergories})
 
 
 def register(request):
     """A view that manages the registration form"""
+    Catergories = Catergory.objects.all()
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
@@ -71,5 +76,5 @@ def register(request):
     else:
         user_form = UserRegistrationForm()
 
-    args = {'user_form': user_form}
+    args = {'user_form': user_form, "Catergories": Catergories}
     return render(request, 'register.html', args)
