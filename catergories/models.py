@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+from multiselectfield import MultiSelectField
 
 # Create your models here.
 
@@ -15,11 +16,28 @@ class Catergory(models.Model):
 class Size(models.Model):
     title = models.CharField(max_length=254, default='')
     options = (
-        ("small","Small"),
-        ("medium","Medium"),
-        ("large","Large"),
+        ("XXXS","XXXSmall"),
+        ("XXS","XXSmall"),
+        ("XS","XSmall"),
+        ("S","Small"),
+        ("M","Medium"),
+        ("L","Large"),
+        ("XL","XLarge"),
+        ("XXL","XXLarge"),
+        ("XXXL","XXXLarge"),
+        ("6","6"),
+        ("6.5","6.5"),
+        ("7","7"),
+        ("7.5","7.5"),
+        ("8","8"),
+        ("8.5","8.5"),
+        ("9","9"),
+        ("10","10"),
+        ("10.5","10.5"),
+        ("11","11"),
+        ("12","12"),
     )
-    option = models.CharField(choices = options, max_length=100, null=True, default=0, blank=True)
+    option = MultiSelectField(choices = options, null=True, default=0, blank=True,)
      
     def __str__(self):
         return self.title   
@@ -38,7 +56,7 @@ class SubCatergory(models.Model):
         
         
 class SubCatergoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'catergory',)
+    list_display = ('title', 'catergory', 'size')
     list_per_page = 25
         
 

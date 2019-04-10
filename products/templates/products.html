@@ -7,15 +7,15 @@
     
     {% for product in product_select %}
         <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4 col-md-3 display panel-default product-panel">
-            <a href="{{ product.id }}">
+            <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/{{ product.id }}">
                 <div class="panel-body">
                     <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
                     <div class="product-info">
                         <h3>{{ product.name }}</h3>
                         <p> &#163; {{ product.price}}</p>
                     </div>
-                    <span class="product-panel-button"><input type="button" value="View Details"></span>
-                    <span class="product-panel-button"><input type="button" value="Add To Cart"></span>
+                    <span class="product-panel-button"><input type="button" value="View Details" class="product-panel-button-details btn btn-warning"></span>
+                    <span class="product-panel-button"><input type="button" value="Add To Cart" class="product-panel-button-cart btn btn-success"></span>
                     <!--<div class="product-price">-->
                         <!--<p class="product-description">{{ product.description }}</p>-->
                     <!--    <p> &#163; {{ product.price}}</p>-->

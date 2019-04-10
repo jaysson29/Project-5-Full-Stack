@@ -48,8 +48,16 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     {% for Catergory in Catergories %}
-                      <a class="dropdown-item" href="{% url 'index' %}">{{Catergory.title}}</a>
+                      <a class="dropdown-item dropdown-sub" href="{% url 'index' %}">{{Catergory.title}}</a>
                       <div class="dropdown-divider"></div>
+                      {% for SubCatergory in SubCatergories %}
+                        {% if SubCatergory.catergory == Catergory %}
+                        <div class="dropdown-menu dropdown-sub-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{% url 'index' %}">{{SubCatergory.title}}</a>
+                          <div class="dropdown-divider"></div>
+                        </div>
+                        {% endif %}
+                      {% endfor %}
                     {% endfor %}
                   </div>
                 </li>

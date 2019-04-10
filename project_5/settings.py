@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'checkout',
-    'storages'
+    'storages',
+    'multiselectfield'
 ]
 
 MIDDLEWARE = [

@@ -2,13 +2,17 @@
 {% block content %}
 
     {% for product in product_select %}
-        <h3>{{catergory_title}}'s > {{subCatergory}} > {{product.name}}</h3>
+        <h3 style="text-align: center;">{{product.name}}</h3>
         <div class="row row-flex main">
             <div class="col-md-12 display panel-default">
                 <div class="product-image" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
-                <h3>{{ product.name }}</h3>
                 <p class="product-description">{{ product.description }}</p>
                 <p> &#163; {{ product.price}}</p>
+                {% for Size in Sizes %}
+                    {% if Size == product.sub_catergory.size %}
+                    <p>{{Size.option}}</p>
+                    {% endif %}
+                {% endfor %}
             </div>
             <form method="post" action="{% url 'add_to_cart' product.id %}">
                 {% csrf_token %}

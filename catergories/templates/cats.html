@@ -24,20 +24,20 @@
       <div class="tab-pane fade show" id="list-{{Catergory.title|lower}}" role="tabpanel" aria-labelledby="list-{{Catergory.title|lower}}-list">
     {% endif %}
         <h1 class="cat-header">{{Catergory.title}}'s</h1>
-        {% for SubCatergory in SubCatergories %}
-          {% if SubCatergory.catergory == Catergory %}
-          <div class="container cat-container">
-            <div class="row cat-row">
-              <div class="col-sm-4 cat-body">
-                <a href="catergories/{{Catergory.title}}/{{SubCatergory.title}}">
-                <img class="cat-img" src="{{MEDIA_URL}}{{SubCatergory.image }}">
-                <h5 class="cat-title">{{SubCatergory.title}}</h5>
-                </a>
-              </div>
+        <div class="container cat-container">
+          <div class="row cat-row">
+          {% for SubCatergory in SubCatergories %}
+            {% if SubCatergory.catergory == Catergory %}
+            <div class="col-sm-4 cat-body">
+              <a href="catergories/{{Catergory.title}}/{{SubCatergory.title}}">
+              <img class="cat-img" src="{{MEDIA_URL}}{{SubCatergory.image }}">
+              <h5 class="cat-title">{{SubCatergory.title}}</h5>
+              </a>
             </div>
+            {% endif %}
+          {% endfor %}
           </div>
-          {% endif %}
-        {% endfor %}
+        </div>
       </div>
     {% endfor %}
   </div>
