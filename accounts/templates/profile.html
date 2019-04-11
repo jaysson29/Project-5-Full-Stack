@@ -1,5 +1,64 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Success!</h2>
-    <p>You are logged in as {{ user.email }} </p>
+<h1 style="text-align: center;">Account</h1>
+<div class="container">
+    <div class="row h100">
+        <div class="col ac-options" >
+            <a href="/account/{{user}}/settings/">
+                <div class="ac-box">
+                    Login & Security
+                    <br>
+                    <i class="fa fa-sign-in" aria-hidden="true" style="font-size: 100px;"></i>
+                </div>
+            </a>
+        </div>
+        <div class="col ac-options" >
+            <a href="/account/{{user}}/orders/">
+                <div class="ac-box">
+                    Orders
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 100px;"></i>
+                </div>
+            </a>
+        </div>
+        <div class="col ac-options" >
+            <a href="/account/{{user}}/reviews/">
+                <div class="ac-box">
+                    Reviews
+                    <br>
+                    <i class="fa fa-comments" aria-hidden="true" style="font-size: 100px;"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row h100">
+        <div class="col ac-options" >
+            <a href="/account/{{user}}/payment/">
+                <div class="ac-box">
+                    Payment Options
+                    <br>
+                    <i class="fa fa-credit-card" aria-hidden="true" style="font-size: 100px;"></i>
+                </div>
+            </a>
+        </div>
+        <div class="col ac-options" >
+            <a href="/account/{{user}}/address/">
+                <div class="ac-box">
+                    Address & Delivery
+                    <br>
+                    <i class="fa fa-address-card" aria-hidden="true" style="font-size: 100px;"></i>
+                </div>
+            </a>
+        </div>
+        <div class="col ac-options" >
+            <a href="/account/{{user}}/support/">
+                <div class="ac-box">
+                    Support
+                    <br>
+                    <i class="fa fa-phone" aria-hidden="true" style="font-size: 100px;"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -14,7 +14,7 @@ import stripe
 
 stripe.api_key = settings.STRIPE_SECRET
 
-@login_required()
+@login_required(login_url='/account/login/')
 def checkout(request):
     """
     A view that renders the cart contents page

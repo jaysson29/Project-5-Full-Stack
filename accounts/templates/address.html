@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <a href="/account/{{user}}/" style="text-align: center;">{{user}}</a>
+    <i class="fa fa-chevron-right" aria-hidden="true" style="color:black; font-size:15px;"></i> 
+    Address And Delivery
+    <h1 style="text-align: center;">Address And Delivery Page</h1>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-9">
+                        <h5 class="mb-0">
+                            <p>Username :</p>
+                            <p>{{user}}</p>
+                        </h5>
+                    </div>
+                    <div class="col" style="padding: 2%;">
+                        <button type="button" class="btn btn-dark" style="height: 100%;width: 100%;">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

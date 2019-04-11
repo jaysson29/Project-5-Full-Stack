@@ -46,7 +46,7 @@
                   <a class="nav-link navText dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Catergories
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     {% for Catergory in Catergories %}
                       <a class="dropdown-item dropdown-sub" href="{% url 'index' %}">{{Catergory.title}}</a>
                       <div class="dropdown-divider"></div>
@@ -65,8 +65,10 @@
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-shopping-cart userSection" aria-hidden="true"></i>
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{%url 'view_cart' %}">View Cart</a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <p style="text-align: center;">Items in cart : {{product_count}}</p>
+                      <p style="text-align: center; ">Total Price : {{total}}</p>
+                    <a class="dropdown-item view-cart" href="{%url 'view_cart' %}">View Cart</a>
                     <div class="dropdown-divider"></div>
                     <a class="btn btn-success cartCheckout" href="{% url 'checkout' %}" role="button">Checkout</a>
                   </div>
@@ -75,13 +77,14 @@
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-user userSection" aria-hidden="true"></i>
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     {% if user.is_authenticated %}
-                      <a href="{% url 'profile' %}" class="dropdown-item">Profile</a>
-                      <a class="dropdown-item" href="#">Account</a>
-                      <a class="dropdown-item" href="#">Purchased</a>
-                      <a class="dropdown-item" href="#">Orders</a>
-                      <a class="dropdown-item" href="#">Support</a>
+                      <a href="/account/{{user}}" class="dropdown-item">Account</a>
+                      <a class="dropdown-item" href="/account/{{user}}/orders/">Orders</a>
+                      <a class="dropdown-item" href="/account/{{user}}/reviews/">Reviews</a>
+                      <a class="dropdown-item" href="/account/{{user}}/payment/">Payments</a>
+                      <a class="dropdown-item" href="/account/{{user}}/address/">Address & Delivery</a>
+                      <a class="dropdown-item" href="/account/{{user}}/support/">Support</a>
                       <div class="dropdown-divider"></div>
                       <a href="{% url 'logout' %}" class="dropdown-item">Log Out</a>
                     {% else %}

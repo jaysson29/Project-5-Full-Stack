@@ -5,6 +5,7 @@ from .forms import UserLoginForm, UserRegistrationForm
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from catergories.models import Catergory
+from .models import Profiles
 
 
 # Create your views here.
@@ -13,13 +14,11 @@ def index(request):
     Catergories = Catergory.objects.all()
     return render(request, "index.html", {"Catergories": Catergories})
 
-
 def logout(request):
     """A view that logs the user out and redirects back to the index page"""
     auth.logout(request)
     messages.success(request, 'You have successfully logged out')
     return redirect(reverse('index'))
-
 
 def login(request):
     """A view that manages the login form"""
@@ -47,13 +46,42 @@ def login(request):
     args = {'user_form': user_form, 'next': request.GET.get('next', ''), "Catergories": Catergories}
     return render(request, 'login.html', args)
 
-
-@login_required
-def profile(request):
+@login_required(login_url='/account/login/')
+def profile(request, user):
     """A view that displays the profile page of a logged in user"""
     Catergories = Catergory.objects.all()
     return render(request, 'profile.html', {"Catergories": Catergories})
 
+@login_required(login_url='/account/login/')
+def settings(request, user):
+    Catergories = Catergory.objects.all()
+    Profile = Profiles.objects.all()
+    return render(request, 'settings.html', {"Catergories": Catergories, "Profile": Profile})
+    
+@login_required(login_url='/account/login/')
+def orders(request, user):
+    Catergories = Catergory.objects.all()
+    return render(request, 'orders.html', {"Catergories": Catergories})
+    
+@login_required(login_url='/account/login/')
+def reviews(request, user):
+    Catergories = Catergory.objects.all()
+    return render(request, 'reviews.html', {"Catergories": Catergories})
+    
+@login_required(login_url='/account/login/')
+def payment(request, user):
+    Catergories = Catergory.objects.all()
+    return render(request, 'payments.html', {"Catergories": Catergories})
+
+@login_required(login_url='/account/login/')
+def address(request, user):
+    Catergories = Catergory.objects.all()
+    return render(request, 'address.html', {"Catergories": Catergories})
+
+@login_required(login_url='/account/login/')
+def support(request, user):
+    Catergories = Catergory.objects.all()
+    return render(request, 'support.html', {"Catergories": Catergories})
 
 def register(request):
     """A view that manages the registration form"""

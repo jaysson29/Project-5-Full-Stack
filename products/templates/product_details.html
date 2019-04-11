@@ -1,29 +1,118 @@
 {% extends 'base.html' %}
 {% block content %}
+<!--Main Product-->
 
-    {% for product in product_select %}
-        <h3 style="text-align: center;">{{product.name}}</h3>
-        <div class="row row-flex main">
-            <div class="col-md-12 display panel-default">
-                <div class="product-image" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
-                <p class="product-description">{{ product.description }}</p>
-                <p> &#163; {{ product.price}}</p>
-                {% for Size in Sizes %}
-                    {% if Size == product.sub_catergory.size %}
-                    <p>{{Size.option}}</p>
-                    {% endif %}
-                {% endfor %}
-            </div>
-            <form method="post" action="{% url 'add_to_cart' product.id %}">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input type="number" name="quantity" min="1" max="999" class="form-control" placeholder="Quantity">
-                    <span class="input-group-btn">
-                        <button class="btn btn-success" type="submit">Add</button>
-                    </span>
+{% for product in product_select %}
+<div class="container">
+    <h3>
+        {{catergory_title}}'s
+        <i class="fa fa-chevron-right" aria-hidden="true" style="color:black; font-size:25px;"></i>
+        <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/">{{subCatergory}}</a>
+        <i class="fa fa-chevron-right" aria-hidden="true" style="color:black; font-size:25px;"></i>
+        {{product.name}}
+    </h3>
+</div>
+<div class="container pip-container">
+    <div class="row pip-main-row">
+        <div class="col-12 col-md-1">
+            <div class="row pip-images-row">
+                <div class="col-md-12">
+                    Image Two
                 </div>
-            </form>
+                <div class="col-md-12">
+                    Images Three
+                </div>
+                <div class="col-md-12">
+                    Images Four
+                </div>
+            </div>
         </div>
-    {% endfor %}
+        <div class="col-12 col-md-6">
+          <div class="pip-image-main" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
+        </div>
+        <div class="col-12 col-md-4 offset-md-1">
+            <div class="row pip-info-row">
+                <div class="col-12" style="border-width: 0px 0px 2px 2px; border-color: #343a40; border-style: solid;">
+                    <h1 style="text-align: center;">{{product.name}}</h1>
+                </div>
+                <div class="col-12 pip-info-des" style="border-width: 0px 0px 2px 2px; border-color: #343a40; border-style: solid; padding: 0;">
+                    <div class="pip-info-des">
+                        <p class="pip-info-p">{{ product.description }}</p>
+                    </div>
+                </div>
+                <div class="col-6" style="border-width: 0px 0px 2px 2px; border-color: #343a40; border-style: solid; padding: 0;">
+                    <select class="size-select">
+                    {% for Size in Sizes %}
+                    	{% if Size == product.sub_catergory.size %}
+                    	    {% for size in Size.option %}
+                                <option class="size-option" id="{{size}}" value="{{size}}">
+                                    {{size}}
+                                </option>
+                            {% endfor %}
+                    	{% endif %}
+                    {% endfor %}
+                    </select>
+                </div>
+                <div class="col-6" style="border-width: 0px 0px 2px 2px; border-color: #343a40; border-style: solid; padding: 0">
+                    <div class="price-container">
+                        <p> &#163; {{ product.price}}</p>
+                    </div>
+                </div>
+                <div class="col-12" style="border-width: 0px 0px 0px 2px; border-color: #343a40; border-style: solid; padding: 0;">
+                    <form method="post" action="{% url 'add_to_cart' product.id %}" class="h100">
+                    	{% csrf_token %}
+                    	<div class="input-group w100 h100">
+                    		<input type="number" name="quantity" min="1" max="999" class="form-control h50" placeholder="Quantity">
+                    		<span class="input-group-btn w100 h50">
+                    			<button class="btn btn-success w100 h100" type="submit">Add</button>
+                    		</span>
+                    	</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<div class="container stand-container">
+    <div class="row">
+        <div class="col stand">
+            Stand
+        </div>
+    </div>
+</div>
+
+<!--More-Info-->
+<div class="jumbotron jumbotron-fluid">
+    <div class="container" style="max-width: 90%;">
+      <div class="row">
+        
+      </div>
+    </div>
+</div>
+
+<!--Similiar-Products-->
+
+<div class="container similar-container">
+    <h1 style="text-align: center;">Similar {{subCatergory.title}} In {{catergory_title}}s </h1>
+    <div class="row row-flex main similar-row">
+        {% for similar in similar_select%}
+        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4 col-md-3 display panel-default similar-panel">
+            <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/{{ similar.id }}">
+                <div class="panel-body">
+                    <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ similar.image }}')"></div>
+                    <div class="product-info">
+                        <h3>{{ similar.name }}</h3>
+                        <p> &#163; {{ similar.price}}</p>
+                    </div>
+                    <span class="product-panel-button"><input type="button" value="View Details" class="product-panel-button-details btn btn-warning"></span>
+                    <span class="product-panel-button"><input type="button" value="Add To Cart" class="product-panel-button-cart btn btn-success"></span>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
 
 {% endblock %}

@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <a href="/account/{{user}}/" style="text-align: center;">Account </a><i class="fa fa-chevron-right" aria-hidden="true" style="color:black; font-size:15px;"></i> Login & Security Settings
+    <h1 style="text-align: center;">Login & Security Settings</h1>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-9">
+                        <h5 class="mb-0">
+                            <p>Username :</p>
+                            <p>{{user}}</p>
+                        </h5>
+                    </div>
+                    <div class="col" style="padding: 2%;">
+                        <button type="button" class="btn btn-dark" style="height: 100%;width: 100%;">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-9">
+                        <h5 class="mb-0">
+                            <p>Email : </p>
+                            <p>{{user.email}}</p>
+                        </h5>
+                    </div>
+                    <div class="col" style="padding: 2%;">
+                        <button type="button" class="btn btn-dark" style="height: 100%;width: 100%;">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-9">
+                        <h5 class="mb-0">
+                            <p>Name : </p>
+                            <p>{{user.first_name}}</p>
+                        </h5>
+                    </div>
+                    <div class="col" style="padding: 2%;">
+                        <button type="button" class="btn btn-dark" style="height: 100%;width: 100%;">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-9">
+                        <h5 class="mb-0">
+                            <p>Middle Name (Optional) : </p>
+                            {% for profile in Profile %}
+                                {% if profile.user == user %}
+                                    <p>{{profile.middle_name}}</p>
+                                {% endif %}
+                            {% endfor %}
+                        </h5>
+                    </div>
+                    <div class="col" style="padding: 2%;">
+                        <button type="button" class="btn btn-dark" style="height: 100%;width: 100%;">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-9">
+                        <h5 class="mb-0">
+                            <p>Last Name : </p>
+                            <p>{{user.last_name}}</p>
+                        </h5>
+                    </div>
+                    <div class="col" style="padding: 2%;">
+                        <button type="button" class="btn btn-dark" style="height: 100%;width: 100%;">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-9">
+                        <h5 class="mb-0">
+                            <p>Mobile Number  (Optional) : </p>
+                             {% for profile in Profile %}
+                                {% if profile.user == user %}
+                                    <p>{{profile.mobile_number}}</p>
+                                {% endif %}
+                            {% endfor %}
+                        </h5>
+                    </div>
+                    <div class="col" style="padding: 2%;">
+                        <button type="button" class="btn btn-dark" style="height: 100%;width: 100%;">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-9">
+                        <h5 class="mb-0">
+                            <p>Password</p>
+                            <p>***********</p>
+                        </h5>
+                    </div>
+                    <div class="col" style="padding: 2%;">
+                        <button type="button" class="btn btn-dark" style="height: 100%;width: 100%;">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

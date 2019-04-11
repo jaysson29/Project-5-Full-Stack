@@ -1,29 +1,72 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<h3>{{catergory_title}}'s > {{subCatergory}}</h3>
-
-<div class="row row-flex main">
-    
-    {% for product in product_select %}
-        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4 col-md-3 display panel-default product-panel">
-            <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/{{ product.id }}">
-                <div class="panel-body">
-                    <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
-                    <div class="product-info">
-                        <h3>{{ product.name }}</h3>
-                        <p> &#163; {{ product.price}}</p>
-                    </div>
-                    <span class="product-panel-button"><input type="button" value="View Details" class="product-panel-button-details btn btn-warning"></span>
-                    <span class="product-panel-button"><input type="button" value="Add To Cart" class="product-panel-button-cart btn btn-success"></span>
-                    <!--<div class="product-price">-->
-                        <!--<p class="product-description">{{ product.description }}</p>-->
-                    <!--    <p> &#163; {{ product.price}}</p>-->
-                    <!--</div>-->
+<div class="container main-product-container">
+    <div class="row">
+        <div class="col-12 col-sm-2">
+            <div id="accordion">
+                <div class="card card-cat-head">
+                    <h3>Catergories</h3>
                 </div>
-            </a>
+                {% for catergory in Catergories %}
+                <div class="card">
+                    <div class="card-header card-cat-title" id="heading{{catergory.id}}">
+                      <h5 class="mb-0">
+                        <button class="btn card-cat-button" data-toggle="collapse" data-target="#collapse{{catergory.id}}" aria-expanded="true" aria-controls="collapse{{catergory.id}}">
+                          {{catergory.title}}s
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapse{{catergory.id}}" class="collapse" aria-labelledby="heading{{catergory.id}}" data-parent="#accordion">
+                        <div class="card-body card-cat-body">
+                            {% for subCatergory in SubCatergories %}
+                                {% if subCatergory.catergory == catergory %}
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn card-subcat-button">{{subCatergory.title}}</button>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor%}
+            </div>
         </div>
-    {% endfor %}
+        <div class="col">
+            <div class="row main-product-row">
+                <div class="col-12">
+                    <h3>{{catergory_title}}'s <i class="fa fa-chevron-right" aria-hidden="true" style="color:black; font-size:25px;"></i> {{subCatergory}}</h3>
+                </div>
+                {% for product in product_select %}
+                    <div class="col-xs-10 col-sm-3 col-md-3 display panel-default product-panel">
+                        <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/{{ product.id }}">
+                            <div class="panel-body">
+                                <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
+                                <div class="product-info">
+                                    <h3>{{ product.name }}</h3>
+                                    <p> &#163; {{product.price}}</p>
+                                </div>
+                                <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/{{ product.id }}" style="top: 100px; position: absolute; width: 100%;">
+                                    <span class="product-panel-button">
+                                        <input type="button" value="View Details" class="product-panel-button-details btn btn-warning">
+                                    </span>
+                                </a>
+                                <div style="top: 200px; position: absolute; width: 100%;">
+                                    <form method="post" action="{% url 'add_to_cart_quick' product.id %}">
+                            	    {% csrf_token %}
+                                	    <span class="product-panel-button">
+                                	        <input type="hidden" name="prev" value="{{ request.path }}">
+                                            <button type="submit" class="product-panel-button-cart btn btn-success">Add To Cart</button>
+                                        </span>
+                                    </form>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
-
 {% endblock %}
