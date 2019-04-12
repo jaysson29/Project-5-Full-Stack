@@ -24,7 +24,16 @@ def show_products(request, catergory_title, subCatergory):
     SubCatergories = SubCatergory.objects.all()
     catergory_select = Catergory.objects.get(title=catergory_title)
     sub_catergory_select = SubCatergory.objects.get(title=subCatergory, catergory = catergory_select)
-    product_select = Product.objects.filter(catergory = catergory_select, sub_catergory = sub_catergory_select).order_by('name')
+    product_pagination = Product.objects.filter(catergory = catergory_select, sub_catergory = sub_catergory_select).order_by('name')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(product_pagination , 12)
+    try:
+        product_select = paginator.page(page)
+    except PageNotAnInteger:
+        product_select = paginator.page(1)
+    except EmptyPage:
+        product_select = paginator.page(paginator.num_pages)
+        
     return render(request, "products.html",
     {
         "product_select": product_select, 

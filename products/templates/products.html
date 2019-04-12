@@ -22,7 +22,9 @@
                                 {% if subCatergory.catergory == catergory %}
                                 <div class="row">
                                     <div class="col">
-                                        <button class="btn card-subcat-button">{{subCatergory.title}}</button>
+                                        <a href="/catergories/{{catergory.title}}/{{subCatergory.title}}/">
+                                            <button class="btn card-subcat-button">{{subCatergory.title}}</button>
+                                        </a>
                                     </div>
                                 </div>
                                 {% endif %}
@@ -39,34 +41,86 @@
                     <h3>{{catergory_title}}'s <i class="fa fa-chevron-right" aria-hidden="true" style="color:black; font-size:25px;"></i> {{subCatergory}}</h3>
                 </div>
                 {% for product in product_select %}
-                    <div class="col-xs-10 col-sm-3 col-md-3 display panel-default product-panel">
-                        <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/{{ product.id }}">
-                            <div class="panel-body">
-                                <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
-                                <div class="product-info">
-                                    <h3>{{ product.name }}</h3>
-                                    <p> &#163; {{product.price}}</p>
-                                </div>
-                                <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/{{ product.id }}" style="top: 100px; position: absolute; width: 100%;">
-                                    <span class="product-panel-button">
-                                        <input type="button" value="View Details" class="product-panel-button-details btn btn-warning">
-                                    </span>
-                                </a>
-                                <div style="top: 200px; position: absolute; width: 100%;">
-                                    <form method="post" action="{% url 'add_to_cart_quick' product.id %}">
-                            	    {% csrf_token %}
-                                	    <span class="product-panel-button">
-                                	        <input type="hidden" name="prev" value="{{ request.path }}">
-                                            <button type="submit" class="product-panel-button-cart btn btn-success">Add To Cart</button>
-                                        </span>
-                                    </form>
-                                </div>
+                <div class="col-xs-10 col-sm-3 col-md-3 display panel-default product-panel">
+                    <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/{{ product.id }}">
+                        <div class="panel-body">
+                            <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
+                            <div class="product-info">
+                                <h3>{{ product.name }}</h3>
+                                <p> &#163; {{product.price}}</p>
                             </div>
-                        </a>
-                    </div>
+                            <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/{{ product.id }}" style="top: 100px; position: absolute; width: 100%;">
+                                <span class="product-panel-button">
+                                    <input type="button" value="View Details" class="product-panel-button-details btn btn-warning">
+                                </span>
+                            </a>
+                            <div style="top: 200px; position: absolute; width: 100%;">
+                                <form method="post" action="{% url 'add_to_cart_quick' product.id %}">
+                        	    {% csrf_token %}
+                            	    <span class="product-panel-button">
+                            	        <input type="hidden" name="prev" value="{{ request.path }}">
+                                        <button type="submit" class="product-panel-button-cart btn btn-success">Add To Cart</button>
+                                    </span>
+                                </form>
+                            </div>
+                        </div>
+                    </a>
+                </div>
                 {% endfor %}
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                {% if product_select.has_previous %}
+                                    <li class="page-item">
+                                      <a class="page-link" href="?page={{ product_select.previous_page_number }}" tabindex="-1">Previous</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#">
+                                            <span>Previous</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% for i in product_select.paginator.page_range %}
+                                    {% if product_select.number == i %}
+                                        <li class="page-item active">
+                                            <a class="page-link" href="#">
+                                                <span>{{ i }} 
+                                                    <span class="sr-only">(current)</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if product_select.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ product_select.next_page_number }}">
+                                            <span>Next</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link">
+                                            <span>Next</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
         </div>
     </div>
+    
+    
 </div>
 {% endblock %}
