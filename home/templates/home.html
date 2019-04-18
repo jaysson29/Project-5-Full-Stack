@@ -6,12 +6,7 @@
         <div class="row home-row">
             <div class="col-sm-12 h100"  style="padding:0;">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                  </ol>
-                  <div class="carousel-inner h100">
+                  <div class="carousel-inner h100  carousel-clip">
                     <div class="carousel-item h100 active">
                       <img class="d-block w-100 h100" src="/media/home/mens-ad.jpg" alt="First slide">
                       <div class="carousel-caption d-none d-md-block">
@@ -36,14 +31,19 @@
                     <i class="fa fa-chevron-right"></i>
                     <span class="sr-only">Next</span>
                   </a>
+                  <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                  </ol>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="jumbotron jumbotron-fluid">
-    <div class="container" style="max-width: 90%;">
+<div class="jumbotron jumbotron-fluid jumbotron-clip">
+    <div class="container cat-clip" style="max-width: 90%;">
       <div class="row">
         {% block cats %}
     
@@ -52,17 +52,83 @@
     </div>
 </div>
 
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid about-clip">
   <div class="container">
     <h1 class="display-4">About</h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    <p class="lead"></p>
+    <div class="row">
+      <div class="col">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="/media/images/Me.jpg" alt="Avatar" class="flip-img">
+            </div>
+            <div class="flip-card-back">
+              <h1>Jason Bishop</h1> 
+              <p>Website Designer & Developer</p> 
+              <p>We love that guy</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="/media/images/watson.jpg" alt="Avatar" class="flip-img">
+            </div>
+            <div class="flip-card-back">
+              <h1>James Watson</h1> 
+              <p>Ceo / Manager</p> 
+              <p>Founder of Stoned Academy</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p style="font-size:30px; margin-top: 100px">
+          Lorem ipsum dolor sit amet,
+          consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Odio tempor orci dapibus ultrices in iaculis nunc sed. 
+          Nisl pretium fusce id velit ut tortor pretium. 
+          Consequat id porta nibh venenatis cras sed felis. 
+          Vulputate eu scelerisque felis imperdiet proin fermentum leo.
+          Quisque id diam vel quam elementum. 
+          Morbi tristique senectus et netus et malesuada fames. 
+          Duis at tellus at urna condimentum mattis pellentesque id nibh. 
+          Enim nulla aliquet porttitor lacus luctus accumsan. 
+          Metus aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. 
+          Pharetra diam sit amet nisl suscipit adipiscing. 
+          In hendrerit gravida rutrum quisque non tellus.
+        </p>
+      </div>
+    </div>
+    
   </div>
 </div>
 
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
+<div class="jumbotron jumbotron-fluid contact-clip">
+  <div class="container contact-container">
     <h1 class="display-4">Contact</h1>
     <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    
+    <form>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="First name">
+      </div>
+      <div class="form-group">
+        <label for="inputEmail4">Email</label>
+        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
   </div>
 </div>
 
