@@ -38,10 +38,14 @@
         <div class="col">
             <div class="row main-product-row">
                 <div class="col-12">
-                    <h3>{{catergory_title}}'s <i class="fa fa-chevron-right" aria-hidden="true" style="color:black; font-size:25px;"></i> {{subCatergory}}</h3>
+                    <h3>
+                        <a href="/catergories/{{catergory_title.title}}/">{{catergory_title}}'s</a>
+                        <i class="fa fa-chevron-right" aria-hidden="true" style="color:black; font-size:25px;"></i>
+                        {{subCatergory}}
+                    </h3>
                 </div>
                 {% for product in product_select %}
-                <div class="col-xs-10 col-sm-3 col-md-3 display panel-default product-panel">
+                <div class="col-xs-12 col-sm-3 col-md-6 col-lg-3 display panel-default product-panel">
                     <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/{{ product.id }}">
                         <div class="panel-body">
                             <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>

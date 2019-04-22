@@ -18,7 +18,19 @@ def all_cats(request):
         "SubCatergories": SubCatergories, 
         "MEDIA_URL": MEDIA_URL
     })
-
+    
+def show_subcats(request, catergory_title):
+    Catergories = Catergory.objects.all()
+    SubCatergories = SubCatergory.objects.all()
+    catergory_select = Catergory.objects.get(title=catergory_title)
+    return render(request, "subcats.html",
+    {
+        "catergory_select": catergory_select, 
+        "SubCatergories": SubCatergories,
+        "MEDIA_URL": MEDIA_URL, 
+        "Catergories": Catergories
+    })
+    
 def show_products(request, catergory_title, subCatergory):
     Catergories = Catergory.objects.all()
     SubCatergories = SubCatergory.objects.all()

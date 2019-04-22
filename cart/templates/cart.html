@@ -11,13 +11,13 @@
                 <div class="card-header" id="heading{{ item.id }}">
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ item.id }}" aria-expanded="true" aria-controls="collapse{{ item.id }}" style="width: 100% !important;">
                     <div class="row">
-                        <div class="col-sm-2">
+                        <div class="col-sm-2 col-md-2">
                         <div class="cart-product" style="background-image: url('{{ MEDIA_URL }}{{ item.product.image }}')"></div>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-2 col-md-8">
                             <h3 class="cart-product-name">{{ item.product.name }}</h3>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-2 col-md-2">
                             <h3 class="cart-product-price">£ {{ item.product.price }}</h3>
                         </div>
                     </div>
@@ -27,18 +27,20 @@
                 <div id="collapse{{ item.id }}" class="collapse" aria-labelledby="heading{{ item.id }}" data-parent="#accordionCart">
                   <div class="card-body">
                     <p class="product-description">{{ item.product.description}}</p>
-                    <form action="{% url 'adjust_cart' item.id %}" method="post" class="form-inline">
+                    <form action="{% url 'adjust_cart' item.id %}" method="post" class="form-inline cartForm">
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="exampleInputAmount" class="sr-only">New Qty</label>
                             <div class="input-group">
-                                <div class="input-group-addon">Qty</div>
-                                <input type="number" name="quantity" min="0" max="999" class="form-control" />
-                                <div class="input-group-addon">{{item.quantity}}</div>
+                                <div class="input-group-addon">Qty : {{item.quantity}}</div>
+                                <input type="number" name="quantity" value="1" min="0" max="999" class="form-control" />
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Amend</button>
-                    </form> 
+                        <button type="submit" class="btn btn-primary cartButtons"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Amend</button>
+                    </form>
+                    <form method="post" action="{% url 'remove_cart_item' item.id %}">
+            	        {% csrf_token %}
+                	    <button type="submit" class="btn btn-danger cartButtons removeCartButton"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Remove</button>
+                    </form>
                   </div>
                 </div>
              </div>

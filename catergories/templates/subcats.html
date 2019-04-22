@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container main-product-container">
+    <div class="row">
+        <div class="col-12 col-sm-2">
+            <div id="accordion">
+                <div class="card card-cat-head">
+                    <h3>Catergories</h3>
+                </div>
+                {% for catergory in Catergories %}
+                <div class="card">
+                    <div class="card-header card-cat-title" id="heading{{catergory.id}}">
+                      <h5 class="mb-0">
+                        <button class="btn card-cat-button" data-toggle="collapse" data-target="#collapse{{catergory.id}}" aria-expanded="true" aria-controls="collapse{{catergory.id}}">
+                          {{catergory.title}}s
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapse{{catergory.id}}" class="collapse" aria-labelledby="heading{{catergory.id}}" data-parent="#accordion">
+                        <div class="card-body card-cat-body">
+                            {% for subCatergory in SubCatergories %}
+                                {% if subCatergory.catergory == catergory %}
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="/catergories/{{catergory.title}}/{{subCatergory.title}}/">
+                                            <button class="btn card-subcat-button">{{subCatergory.title}}</button>
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor%}
+            </div>
+        </div>
+        <div class="col">
+            <div class="row main-product-row">
+                <div class="col-12">
+                    <h3 style="text-align:center;">{{catergory_select}}'s</h3>
+                </div>
+                {% for SubCatergory in SubCatergories %}
+                    {% if SubCatergory.catergory == catergory_select %}
+                    <div class="col-xs-10 col-sm-3 col-md-6 col-lg-3 display panel-default product-panel">
+                        <a href="/catergories/{{catergory_select.title}}/{{SubCatergory.title}}/">
+                            <div class="panel-body">
+                                <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ SubCatergory.image }}')"></div>
+                                <div class="product-info">
+                                    <h3 style="text-align: center;">{{ SubCatergory.title }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {%endif%}
+                {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+    
+    
+</div>
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'home.html' %}
 
 {% block cats %}
-<div class="col-sm-2" style="padding-left: 0;padding-right: 0;">
+<div class="col-sm-2 catergoriesMain" style="padding-left: 0;padding-right: 0;">
   <div class="list-group" id="list-tab" role="tablist">
     <a class="list-group-item list-group-item-action disabled header-cat">Catergories</a>
     {% for Catergory in Catergories %}
@@ -28,7 +28,7 @@
           <div class="row cat-row">
           {% for SubCatergory in SubCatergories %}
             {% if SubCatergory.catergory == Catergory %}
-            <div class="col-sm-4 cat-body">
+            <div class="col-sm-6 col-md-4 cat-body">
               <a href="catergories/{{Catergory.title}}/{{SubCatergory.title}}">
               <img class="cat-img" src="{{MEDIA_URL}}{{SubCatergory.image }}">
               <h5 class="cat-title">{{SubCatergory.title}}</h5>

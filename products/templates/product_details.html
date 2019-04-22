@@ -3,9 +3,9 @@
 <!--Main Product-->
 
 {% for product in product_select %}
-<div class="container">
+<div class="container productContainer">
     <h3>
-        {{catergory_title}}'s
+        <a href="/catergories/{{catergory_title.title}}/">{{catergory_title}}'s</a>
         <i class="fa fa-chevron-right" aria-hidden="true" style="color:black; font-size:25px;"></i>
         <a href="/catergories/{{catergory_title.title}}/{{subCatergory.title}}/">{{subCatergory}}</a>
         <i class="fa fa-chevron-right" aria-hidden="true" style="color:black; font-size:25px;"></i>
@@ -13,34 +13,95 @@
     </h3>
 </div>
 <div class="container pip-container">
+    <div class="row">
+        <div class="col col-md-1">
+            
+        </div>
+        <div class="col-12 col-md-9 pip-name">
+            <h1>{{product.name}}</h1>
+        </div>
+        <div class="col col-md-2">
+            
+        </div>
+    </div>
     <div class="row pip-main-row">
-        <div class="col-12 col-md-1">
+        <div class="col-12">
+            <div class="pip-image-main" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
+        </div>
+    </div>
+    <div class="row pip-over-row">
+        <div class="col-12 col-md-11 starGroup">
+            {% if product.rating == "1/10" %}
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            {% elif product.rating == "2/10" %}
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            {% elif product.rating == "3/10" %}
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            {% elif product.rating == "4/10" %}
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+            {% elif product.rating == "5/10" %}
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row pip-over-row">
+        <div class="col col-md-4">
             <div class="row pip-images-row">
-                <div class="col-md-12">
-                    Image Two
+                <div class="col-4 col-md-12">
+                    <div class="pip-image-two">
+                        <img src="{{ MEDIA_URL }}{{ product.image }}"></img>
+                    </div>
                 </div>
-                <div class="col-md-12">
-                    Images Three
+                <div class="col-4 col-md-12">
+                    <div class="pip-image-three">
+                        <img src="{{ MEDIA_URL }}{{ product.image }}"></img>
+                    </div>
                 </div>
-                <div class="col-md-12">
-                    Images Four
+                <div class="col-4 col-md-12">
+                    <div class="pip-image-four">
+                        <img src="{{ MEDIA_URL }}{{ product.image }}"></img>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6">
-          <div class="pip-image-main" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
+        <div class="col-12 col-md-5">
+            
         </div>
-        <div class="col-12 col-md-4 offset-md-1">
+        <div class="col col-md-3">
             <div class="row pip-info-row">
-                <div class="col-12" style="border-width: 0px 0px 2px 2px; border-color: #343a40; border-style: solid;">
-                    <h1 style="text-align: center;">{{product.name}}</h1>
+                <div class="col-12">
+                    <div class="price-container">
+                        <p> &#163; {{ product.price}}</p>
+                    </div>
                 </div>
-                <div class="col-12 pip-info-des" style="border-width: 0px 0px 2px 2px; border-color: #343a40; border-style: solid; padding: 0;">
+                <div class="col-12 pip-info-des">
                     <div class="pip-info-des">
+                        <h3>Description</h3>
+                        <hr class="description">
                         <p class="pip-info-p">{{ product.description }}</p>
                     </div>
                 </div>
-                <div class="col-6" style="border-width: 0px 0px 2px 2px; border-color: #343a40; border-style: solid; padding: 0;">
+                <div class="col-12">
                     <select class="size-select">
                     {% for Size in Sizes %}
                     	{% if Size == product.sub_catergory.size %}
@@ -53,13 +114,8 @@
                     {% endfor %}
                     </select>
                 </div>
-                <div class="col-6" style="border-width: 0px 0px 2px 2px; border-color: #343a40; border-style: solid; padding: 0">
-                    <div class="price-container">
-                        <p> &#163; {{ product.price}}</p>
-                    </div>
-                </div>
-                <div class="col-12" style="border-width: 0px 0px 0px 2px; border-color: #343a40; border-style: solid; padding: 0;">
-                    <form method="post" action="{% url 'add_to_cart' product.id %}" class="h100">
+                <div class="col-12">
+                    <form method="post" action="{% url 'add_to_cart' product.id %}" class="pip-form">
                     	{% csrf_token %}
                     	<div class="input-group w100 h100">
                     		<input type="number" name="quantity" min="1" max="999" class="form-control h50" placeholder="Quantity">
@@ -69,24 +125,27 @@
                     	</div>
                     </form>
                 </div>
+                
             </div>
         </div>
     </div>
 </div>
 {% endfor %}
-<div class="container stand-container">
-    <div class="row">
-        <div class="col stand">
-            Stand
-        </div>
-    </div>
-</div>
 
 <!--More-Info-->
 <div class="jumbotron jumbotron-fluid">
     <div class="container" style="max-width: 90%;">
       <div class="row">
-        
+        <h1>Additional Information...</h1>
+      </div>
+    </div>
+</div>
+
+<!--Reviews-->
+<div class="jumbotron jumbotron-fluid">
+    <div class="container" style="max-width: 90%;">
+      <div class="row">
+        <h1>Reviews Here...</h1>
       </div>
     </div>
 </div>
@@ -116,3 +175,30 @@
 
 
 {% endblock %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            
+        </div>
+        <div class="col">
+            
+        </div>
+        <div class="col">
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            
+        </div>
+        <div class="col">
+            
+        </div>
+        <div class="col">
+            
+        </div>
+    </div>
+</div>

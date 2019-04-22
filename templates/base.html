@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <title>Start Website</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" type="text/css"/>
     {% block head_js %}
     {% endblock %}
 </head>
@@ -17,18 +17,18 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light p-3 navbar-fixed">
         <div class="row nav-row">
-          <div class="col-sm-3">
+          <div class="col-sm-3 navLogo">
             <a class="navbar-brand" href="{% url 'index' %}">STONED ACADEMY</a>
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-5 navSearch" id="navSearch">
             <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
           </div>
-          <div class="col-sm-4">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="float: right;">
-              <span class="navbar-toggler-icon"></span>
+          <div class="col-sm-4 navMenu">
+            <button class="navbar-toggler navButton" type="button" onclick="navShow()" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fa fa-bars" id="navButton"></i>
             </button>
           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -42,16 +42,16 @@
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     {% for Catergory in Catergories %}
-                      <a class="dropdown-item dropdown-sub" href="{% url 'index' %}">{{Catergory.title}}</a>
+                      <a class="dropdown-item dropdown-sub" href="{% url 'Show_subcats' Catergory.title %}"/>{{Catergory.title}}</a>
                       <div class="dropdown-divider"></div>
+                      <div class="dropdown-menu dropdown-sub-menu" href="{% url 'index' %}" aria-labelledby="navbarDropdown">
                       {% for SubCatergory in SubCatergories %}
                         {% if SubCatergory.catergory == Catergory %}
-                        <div class="dropdown-menu dropdown-sub-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="{% url 'index' %}">{{SubCatergory.title}}</a>
                           <div class="dropdown-divider"></div>
-                        </div>
                         {% endif %}
                       {% endfor %}
+                      </div>
                     {% endfor %}
                   </div>
                 </li>
@@ -67,7 +67,7 @@
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                       <p style="text-align: center;">Items in cart : {{product_count}}</p>
-                      <p style="text-align: center; ">Total Price : {{total}}</p>
+                      <p style="text-align: center; ">Total Price : £{{total}}</p>
                     <a class="dropdown-item view-cart" href="{%url 'view_cart' %}">View Cart</a>
                     <div class="dropdown-divider"></div>
                     <a class="btn btn-success cartCheckout" href="{% url 'checkout' %}" role="button">Checkout</a>
@@ -100,7 +100,7 @@
     </nav>
     
     <!-- Content -->
-    <div style="padding: 80px 0 0 0;">
+    <div class="content">
         {% block content %}
         
         {% endblock %}
@@ -115,27 +115,27 @@
           <div class="row">
             <div class="col-sm-3"></div>
             <!-- Face book icon -->
-            <div class="col-sm-1">
+            <div class="col-sm-1 mobileIcon">
               <a class="socailIcons" href="https://www.facebook.com/spacereport/?ref=br_rs"><i class="fa fa-facebook fa-2x"></i></a>
             </div>
             <!-- twitter icon -->
-            <div class="col-sm-1">
+            <div class="col-sm-1 mobileIcon">
               <a class="socailIcons" href="https://twitter.com/search?q=space&src=typd"><i class="fa fa-twitter-square fa-2x"></i></a>
             </div>
             <!-- youtube icon -->
-            <div class="col-sm-1">
+            <div class="col-sm-1 mobileIcon">
               <a class="socailIcons" href="https://www.youtube.com/results?search_query=space"><i class="fa fa-youtube-square fa-2x"></i></a>
             </div>
             <!-- GitHub icon -->
-            <div class="col-sm-1">
+            <div class="col-sm-1 mobileIcon">
               <a class="socailIcons" href="https://github.com/jaysson29"><i class="fa fa-github-square fa-2x"></i></a>
             </div>
             <!-- Wikipedia icon -->
-            <div class="col-sm-1">
+            <div class="col-sm-1 mobileIcon">
               <a class="socailIcons" href="https://en.wikipedia.org/wiki/Space"><i class="fa fa-wikipedia-w fa-2x"></i></a>
             </div>
             <!-- Google icon -->
-            <div class="col-sm-1">
+            <div class="col-sm-1 mobileIcon">
               <a class="socailIcons" href="https://www.google.co.uk/search?q=space&rlz=1C1EKKP_enGB778GB778&oq=space&aqs=chrome.0.69i59j69i61j69i65.849j0j9&sourceid=chrome&ie=UTF-8"><i class="fa fa-google fa-2x"></i></a>
             </div>
           </div>
@@ -144,6 +144,7 @@
     </footer>
 
     <!-- Optional JavaScript -->
+    <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
