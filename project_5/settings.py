@@ -85,12 +85,19 @@ WSGI_APPLICATION = 'project_5.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+if "DATABASE_URL" in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-}
+else:
+    print("Database url ins not found. Using SQLite Instead")
+    DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.sqlite3',
+           'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+       }
+   }
 
 
 # Password validation
@@ -133,31 +140,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-# USE_S3 = os.getenv('USE_S3') == 'TRUE'
-# if USE_S3:
-#   AWS_S3_OBJECT_PARAMETERS = {
-#       'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-#       'CacheControl': 'max-age=94608000',
-#   }
+USE_S3 = os.getenv('USE_S3') == 'TRUE'
+if USE_S3:
+  AWS_S3_OBJECT_PARAMETERS = {
+      'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+      'CacheControl': 'max-age=94608000',
+  }
    
-#   AWS_STORAGE_BUCKET_NAME = 'project-5'
-#   AWS_S3_REGION_NAME = 'eu-west-2'
-#   AWS_DEFAULT_ACL = None
-#   AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-#   AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+  AWS_STORAGE_BUCKET_NAME = 'project-5'
+  AWS_S3_REGION_NAME = 'eu-west-2'
+  AWS_DEFAULT_ACL = None
+  AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+  AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
    
-#   AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-#   STATICFILES_LOCATION = 'static'
-#   STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-#   STATIC_URL = 'https://'+ AWS_S3_CUSTOM_DOMAIN + '/' + STATICFILES_LOCATION + '/'
+  AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+  STATICFILES_LOCATION = 'static'
+  STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+  STATIC_URL = 'https://'+ AWS_S3_CUSTOM_DOMAIN + '/' + STATICFILES_LOCATION + '/'
     
-#   MEDIAFILES_LOCATION = 'media'
-#   DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
-#   MEDIA_URL = 'https://' + AWS_S3_CUSTOM_DOMAIN + '/' + MEDIAFILES_LOCATION + '/'
-#   MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# else:
-STATIC_URL = '/static/'
-STATICFILES_DIRS=[(os.path.join(BASE_DIR,'static'))]
+  MEDIAFILES_LOCATION = 'media'
+  DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+  MEDIA_URL = 'https://' + AWS_S3_CUSTOM_DOMAIN + '/' + MEDIAFILES_LOCATION + '/'
+  MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+else:
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS=[(os.path.join(BASE_DIR,'static'))]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
