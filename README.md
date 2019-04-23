@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/jaysson29/Project-5-Full-Stack.svg?branch=master)](https://travis-ci.org/jaysson29/Project-5-Full-Stack)
      ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
     '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
     |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
