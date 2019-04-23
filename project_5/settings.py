@@ -13,10 +13,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 #import env
 import dj_database_url
-import django_heroku
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -146,26 +142,25 @@ USE_TZ = True
 
 USE_S3 = os.getenv('USE_S3') == 'TRUE'
 if USE_S3:
-  AWS_S3_OBJECT_PARAMETERS = {
+    AWS_S3_OBJECT_PARAMETERS = {
       'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
       'CacheControl': 'max-age=94608000',
-  }
+    }
+    AWS_STORAGE_BUCKET_NAME = 'project-5'
+    AWS_S3_REGION_NAME = 'eu-west-2'
+    AWS_DEFAULT_ACL = None
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
    
-  AWS_STORAGE_BUCKET_NAME = 'project-5'
-  AWS_S3_REGION_NAME = 'eu-west-2'
-  AWS_DEFAULT_ACL = None
-  AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-  AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-   
-  AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-  STATICFILES_LOCATION = 'static'
-  STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-  STATIC_URL = 'https://'+ AWS_S3_CUSTOM_DOMAIN + '/' + STATICFILES_LOCATION + '/'
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    STATICFILES_LOCATION = 'static'
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATIC_URL = 'https://'+ AWS_S3_CUSTOM_DOMAIN + '/' + STATICFILES_LOCATION + '/'
     
-  MEDIAFILES_LOCATION = 'media'
-  DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
-  MEDIA_URL = 'https://' + AWS_S3_CUSTOM_DOMAIN + '/' + MEDIAFILES_LOCATION + '/'
-  MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIAFILES_LOCATION = 'media'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIA_URL = 'https://' + AWS_S3_CUSTOM_DOMAIN + '/' + MEDIAFILES_LOCATION + '/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
     STATIC_URL = '/static/'
     STATICFILES_DIRS=[(os.path.join(BASE_DIR,'static'))]
