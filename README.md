@@ -16,25 +16,36 @@ This website has various sections with custom made images, designed by my self i
 The main functionality for this website is a online clothing store that you can use on all devices to purchase items from, the website has a admin page,
 that allows the admin to add more products and catergories when they are needed, deleted and edit products and catergories.
 
-I have used the CRUD structure to design the backend database
+I have used the CRUD structure to design the backend database.
 
 ## Tech Used
 
 ### Some the tech used includes:
 - [HTML](https://en.wikipedia.org/wiki/HTML)
-    - I used **HTML** for the mark up and layout of the templates
+    - I used **HTML** for the mark up and layout of the templates.
 - [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
-    - I used **CSS** to give the website some style and make the site look good
+    - I used **CSS** to give the website some style and make the site look good.
 - [Javascript](https://www.javascript.com/)
-    - I used **Javascript** to give more functionality when needed
+    - I used **Javascript** to give more functionality when needed.
 - [Bootstrap](http://getbootstrap.com/)
-    - I used **Bootstrap** to give our project a simple, responsive layout
+    - I used **Bootstrap** to give our project a simple, responsive layout.
 - [JQuery](https://jquery.com)
-    - I used **JQuery** for boostrap and displaying modal
+    - I used **JQuery** for boostrap and displaying modal.
 - [Python](https://www.python.org/)
-    - I used **Python** for the backend of the website to create models and views and to be use with django
+    - I used **Python** for the backend of the website to create models and views and to be use with django.
 - [Django](https://www.djangoproject.com/)
-    - I used **Django** for the backend of the website to create url patterns and admin panel
+    - I used **Django** for the backend of the website to create url patterns and admin panel.
+
+##Testing
+
+### Tests:
+- [Django](https://www.djangoproject.com/)
+    - I used **Django** in-built testing to test products and other models.
+- [Travis-ci](https://travis-ci.org)
+    - I used **Travis-ci** for testing and deployment.
+- [Myself]
+    - I used **Myself** for testing of all aspect of the website to see if everthing worked as it was intended for.
+    - I also tested the website on different device to see if the site functioned on every device.
 
 ## Credits
 
