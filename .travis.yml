@@ -1,8 +1,6 @@
-laungue: pyhton
-pyhton:
+language: python
+python:
 - "3.4"
-install: 
-- "sudo pip install --upgrade pip"
-- "pip install --user -r requirements.txt"
+install: "pip install -r requirements.txt"
 script:
 - SECRET_KEY="whatever" ./manage.py test
